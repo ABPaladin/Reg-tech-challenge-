@@ -1,6 +1,4 @@
 import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.js'
 
 document.querySelector('#app').innerHTML = `
@@ -10,7 +8,7 @@ document.querySelector('#app').innerHTML = `
       <p>
       Input for ip
     </p>  
-    
+        
     <button type="button">Submit</button>
       </div>
     <p class="read-the-docs">
