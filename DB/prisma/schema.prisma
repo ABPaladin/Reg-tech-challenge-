@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model automatic_check_audit_headers {
+  id                         Int                          @id @default(autoincrement())
+  company_ip_id              Int
+  datetime                   DateTime                     @default(now()) @db.Timestamptz(6)
+  company_ips                company_ips                  @relation(fields: [company_ip_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  automatic_check_audit_rows automatic_check_audit_rows[]
+}
+
+model automatic_check_audit_rows {
+  id                              Int                           @id @default(autoincrement())
+  automatic_check_audit_header_id Int
+  automatic_check_id              Int
+  passed                          Boolean?
+  comment                         String?
+  automatic_check_audit_headers   automatic_check_audit_headers @relation(fields: [automatic_check_audit_header_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  automatic_checks                automatic_checks              @relation(fields: [automatic_check_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([automatic_check_audit_header_id, automatic_check_id])
+}
+
+model automatic_checks {
+  id                         Int                          @id @default(autoincrement())
+  name                       String                       @unique
+  automatic_check_audit_rows automatic_check_audit_rows[]
+}
+
+model checklists {
+  id            Int         @id @default(autoincrement())
+  company_ip_id Int
+  datetime      DateTime    @default(now()) @db.Timestamptz(6)
+  company_ips   company_ips @relation(fields: [company_ip_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model companies {
+  id          Int           @id @default(autoincrement())
+  name        String
+  password    String        @unique
+  company_ips company_ips[]
+  incidents   incidents[]
+}
+
+model company_ips {
+  id                            Int                             @id @default(autoincrement())
+  company_id                    Int
+  url                           String?
+  automatic_check_audit_headers automatic_check_audit_headers[]
+  checklists                    checklists[]
+  companies                     companies                       @relation(fields: [company_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model incident_statuses {
+  id           Int         @id @default(autoincrement())
+  name         String      @unique
+  status_order Int         @unique
+  incidents    incidents[]
+}
+
+model incidents {
+  id                        Int               @id @default(autoincrement())
+  company_id                Int
+  first_response            String
+  first_response_timestamp  DateTime          @default(now()) @db.Timestamptz(6)
+  second_response           String?
+  second_response_timestamp DateTime?         @db.Timestamptz(6)
+  third_response            String?
+  third_response_timestamp  DateTime?         @db.Timestamptz(6)
+  is_critical               Boolean
+  is_initially_averted      Boolean
+  repeat_incident_id        Int?
+  status                    Int
+  companies                 companies         @relation(fields: [company_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  incidents                 incidents?        @relation("incidentsToincidents", fields: [repeat_incident_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  other_incidents           incidents[]       @relation("incidentsToincidents")
+  incident_statuses         incident_statuses @relation(fields: [status], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
