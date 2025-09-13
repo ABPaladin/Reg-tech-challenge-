@@ -10,6 +10,6 @@ public class IncidentController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetCompanyIncidents(int companyId)
     {
-        return 
+        return Ok();
     }
 }
