@@ -109,6 +109,7 @@ create table automatic_check_audit_rows
 create table checklist_questions
 (
     id              int primary key generated always as identity,
+    question_order           int unique not null,
     question_text   text not null,
     recommendations text not null
 );
