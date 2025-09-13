@@ -60,7 +60,7 @@ create table incidents
     is_critical               bool        not null,
     is_initially_averted      bool        not null,
     repeat_incident_id        int         null references incidents,
-    status                    int         not null references incident_statuses
+    status_id                 int         not null references incident_statuses
 );
 
 -----------------------------

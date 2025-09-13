@@ -11,24 +11,24 @@ public class IncidentController(IIncidentService service) : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<IncidentResponseDTO>>> GetCompanyIncidents(int companyId)
     {
-        return Ok(new List<IncidentResponseDTO>());
+        return Ok(await service.GetCompanyIncidents(companyId));
     }
 
     [HttpPost("first")]
     public async Task<ActionResult<IncidentResponseDTO>> CreateIncident(CreateIncidentRequestDTO requestDto)
     {
-        return Ok(new IncidentResponseDTO());
+        return Ok(await service.CreateIncident(requestDto));
     }
     
-    [HttpPost("second")]
+    [HttpPost("second-DO-NOT-USE")]
     public async Task<ActionResult<IncidentResponseDTO>> UpdateIncident(UpdateIncidentRequestDTO requestDto)
     {
-        return Ok(new IncidentResponseDTO());
+        return Ok(await service.UpdateIncident(requestDto));
     }
 
     [HttpPost("third")]
     public async Task<ActionResult<IncidentResponseDTO>> CloseIncident(CloseIncidentRequestDTO requestDto)
     {
-        return Ok(new IncidentResponseDTO());
+        return Ok(await service.CloseIncident(requestDto));
     }
 }

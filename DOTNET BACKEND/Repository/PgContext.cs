@@ -196,7 +196,7 @@ public partial class PgContext : DbContext
             entity.Property(e => e.RepeatIncidentId).HasColumnName("repeat_incident_id");
             entity.Property(e => e.SecondResponse).HasColumnName("second_response");
             entity.Property(e => e.SecondResponseTimestamp).HasColumnName("second_response_timestamp");
-            entity.Property(e => e.Status).HasColumnName("status");
+            entity.Property(e => e.StatusId).HasColumnName("status_id");
             entity.Property(e => e.ThirdResponse).HasColumnName("third_response");
             entity.Property(e => e.ThirdResponseTimestamp).HasColumnName("third_response_timestamp");
 
@@ -209,10 +209,10 @@ public partial class PgContext : DbContext
                 .HasForeignKey(d => d.RepeatIncidentId)
                 .HasConstraintName("incidents_repeat_incident_id_fkey");
 
-            entity.HasOne(d => d.StatusNavigation).WithMany(p => p.Incidents)
-                .HasForeignKey(d => d.Status)
+            entity.HasOne(d => d.Status).WithMany(p => p.Incidents)
+                .HasForeignKey(d => d.StatusId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("incidents_status_fkey");
+                .HasConstraintName("incidents_status_id_fkey");
         });
 
         modelBuilder.Entity<IncidentStatus>(entity =>

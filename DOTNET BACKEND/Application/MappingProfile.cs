@@ -18,9 +18,12 @@ public class MappingProfile : Profile
             .ForMember(dto => dto.Recommendations, expression => 
                 expression.MapFrom(r => r.Question.Recommendations));
 
-
         CreateMap<CompanyRegisterRequestDTO, Company>();
         CreateMap<Company, CompanyRegisterResponseDTO>();
         CreateMap<Company, CompanyLoginResponseDto>();
+
+        CreateMap<CreateIncidentRequestDTO, Incident>();
+        CreateMap<Incident, IncidentResponseDTO>()
+            .ForMember(dto => dto.Status, expression => expression.MapFrom(r => r.Status.Name));
     }
 }

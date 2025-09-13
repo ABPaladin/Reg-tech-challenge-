@@ -3,7 +3,7 @@
 public class CreateIncidentRequestDTO
 {
     public int CompanyId { get; set; }
-    public string? Text { get; set; }
+    public string? FirstResponse { get; set; }
     public bool? IsCritical { get; set; }
     public bool? IsInitiallyAverted { get; set; }
     public int? RepeatIncidentId { get; set; }

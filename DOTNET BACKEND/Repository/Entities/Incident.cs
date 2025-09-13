@@ -27,7 +27,7 @@ public partial class Incident
 
     public int? RepeatIncidentId { get; set; }
 
-    public int Status { get; set; }
+    public int StatusId { get; set; }
 
     public virtual Company Company { get; set; } = null!;
 
@@ -35,5 +35,5 @@ public partial class Incident
 
     public virtual Incident? RepeatIncident { get; set; }
 
-    public virtual IncidentStatus StatusNavigation { get; set; } = null!;
+    public virtual IncidentStatus Status { get; set; } = null!;
 }
