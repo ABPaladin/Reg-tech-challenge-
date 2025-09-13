@@ -4,4 +4,5 @@ Prerequisites:
 
 Installation:
 - Install postgres with default database password "postgres"
+- Open pgAdmin, run the DB/db.sql script to create db schema
 - Move into the api folder, execute `dotnet run`
