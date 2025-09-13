@@ -1,4 +1,6 @@
+drop table if exists checklist_answer_rows;
 drop table if exists checklists;
+drop table if exists checklist_questions;
 
 drop table if exists automatic_check_audit_rows;
 drop table if exists automatic_check_audit_headers;
@@ -104,13 +106,25 @@ create table automatic_check_audit_rows
 
 -----------------------------
 
+create table checklist_questions
+(
+    id              int primary key generated always as identity,
+    question_text   text not null,
+    recommendations text not null
+);
+
 create table checklists
 (
-    id            int primary key generated always as identity,
-    company_ip_id int         not null references company_ips,
-    datetime      timestamptz not null default(now())
-    
-
+    id         int primary key generated always as identity,
+    company_id int         not null references companies,
+    datetime   timestamptz not null default (now())
     --all the questions and their answers
 );
 
+create table checklist_answer_rows
+(
+    id                 int primary key generated always as identity,
+    checklist_id       int  not null references checklists,
+    question_id        int  not null references checklist_questions,
+    answered_correctly bool not null
+);
