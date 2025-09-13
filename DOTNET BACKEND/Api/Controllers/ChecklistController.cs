@@ -8,6 +8,13 @@ namespace Api.Controllers;
 [Route("[controller]")]
 public class ChecklistController(IChecklistService service) : ControllerBase
 {
+    [HttpGet("score")]
+    public async Task<ActionResult<int>> GetScore(int companyId)
+    {
+        throw new NotImplementedException();
+    }
+
+    
     [HttpGet("{companyId:int}")]
     public async Task<ActionResult<List<ChecklistResponseDTO>>> GetAnsweredChecklists(int companyId)
     {

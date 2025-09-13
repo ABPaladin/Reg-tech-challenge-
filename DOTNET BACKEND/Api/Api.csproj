@@ -7,6 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Reference Include="Simple.DotNMap">
+            <HintPath>lib\Simple.DotNMap.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
     </ItemGroup>
 

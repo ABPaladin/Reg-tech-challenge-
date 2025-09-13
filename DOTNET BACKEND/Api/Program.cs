@@ -1,4 +1,5 @@
 using Application;
+using PenTest;
 using Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.SetupRepository();
+builder.Services.SetupPenTest();
 builder.Services.SetupApplication();
 
 var app = builder.Build();

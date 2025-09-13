@@ -9,6 +9,13 @@ namespace Api.Controllers;
 public class AutoCheckController(IAutoCheckService service) : ControllerBase
 {
     //TODO: endpoint for score
+    [HttpGet("score")]
+    public async Task<ActionResult<int>> GetScore(int companyId)
+    {
+        throw new NotImplementedException();
+    }
+    
+    
     [HttpGet]
     public async Task<ActionResult<List<AutoCheckResponseDTO>>> GetOldAutoChecks(int companyId)
     {
@@ -18,7 +25,6 @@ public class AutoCheckController(IAutoCheckService service) : ControllerBase
     [HttpPost]
     public async Task<IActionResult> ExecuteNewAutoCheck(int companyId, string ipToCheck)
     {
-        await service.ExecuteNewAutoCheck(companyId, ipToCheck);
-        return Ok();
+        return Ok(await service.ExecuteNewAutoCheck(companyId, ipToCheck));
     }
 }
