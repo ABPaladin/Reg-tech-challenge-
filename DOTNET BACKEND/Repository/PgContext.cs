@@ -122,8 +122,18 @@ public partial class PgContext : DbContext
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("id");
+            entity.Property(e => e.Address).HasColumnName("address");
+            entity.Property(e => e.IsoCertified).HasColumnName("iso_certified");
             entity.Property(e => e.Name).HasColumnName("name");
+            entity.Property(e => e.OpsecTools).HasColumnName("opsec_tools");
             entity.Property(e => e.Password).HasColumnName("password");
+            entity.Property(e => e.ResponsibleEmail).HasColumnName("responsible_email");
+            entity.Property(e => e.ResponsibleName).HasColumnName("responsible_name");
+            entity.Property(e => e.ResponsiblePhone).HasColumnName("responsible_phone");
+            entity.Property(e => e.RiskAssesment).HasColumnName("risk_assesment");
+            entity.Property(e => e.RiskSolution).HasColumnName("risk_solution");
+            entity.Property(e => e.SectorType).HasColumnName("sector_type");
+            entity.Property(e => e.Size).HasColumnName("size");
         });
 
         modelBuilder.Entity<CompanyIp>(entity =>
