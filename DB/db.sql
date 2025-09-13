@@ -15,16 +15,16 @@ create table companies
     id                int primary key generated always as identity,
     name              text not null,
     password          text not null unique,
-    address           text,
-    responsible_name  text,
+--     address           text,
+--     responsible_name  text,
     responsible_phone text,
-    responsible_email text,
-    size              text,
-    sector_type       text,
-    iso_certified     text,
-    risk_assesment    text,
-    risk_solution     text,
-    opsec_tools       text
+    responsible_email text
+--     size              text,
+--     sector_type       text,
+--     iso_certified     text,
+--     risk_assesment    text,
+--     risk_solution     text,
+--     opsec_tools       text
 );
 
 create table incident_statuses
@@ -108,7 +108,8 @@ create table checklists
 (
     id            int primary key generated always as identity,
     company_ip_id int         not null references company_ips,
-    datetime      timestamptz not null default now()
+    datetime      timestamptz not null default(now())
+    
 
     --all the questions and their answers
 );
