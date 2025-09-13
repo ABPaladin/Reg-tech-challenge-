@@ -25,5 +25,12 @@ public class MappingProfile : Profile
         CreateMap<CreateIncidentRequestDTO, Incident>();
         CreateMap<Incident, IncidentResponseDTO>()
             .ForMember(dto => dto.Status, expression => expression.MapFrom(r => r.Status.Name));
+
+        CreateMap<AutomaticCheckAuditHeader, AutoCheckResponseDTO>();
+        CreateMap<AutomaticCheckAuditRow, AutoCheckResponseRowDTO>()
+            .ForMember(dto => dto.CheckName, expression => 
+                expression.MapFrom(r => r.AutomaticCheck.Name))
+            .ForMember(dto => dto.CheckOrder, expression => 
+                expression.MapFrom(r => r.AutomaticCheck.CheckOrder));
     }
 }

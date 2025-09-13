@@ -12,13 +12,13 @@ public class AutoCheckController(IAutoCheckService service) : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<AutoCheckResponseDTO>>> GetOldAutoChecks(int companyId)
     {
-        return Ok(new List<AutoCheckResponseDTO>());
+        return Ok(await service.GetOldAutoChecks(companyId));
     }
 
     [HttpPost]
     public async Task<IActionResult> ExecuteNewAutoCheck(int companyId, string ipToCheck)
     {
-        //execute stuff
+        await service.ExecuteNewAutoCheck(companyId, ipToCheck);
         return Ok();
     }
 }
