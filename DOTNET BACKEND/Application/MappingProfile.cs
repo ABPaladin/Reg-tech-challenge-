@@ -1,0 +1,26 @@
+﻿using AutoMapper;
+using Domain.DTO;
+using Repository.Entities;
+
+namespace Application;
+
+public class MappingProfile : Profile
+{
+    public MappingProfile()
+    {
+        CreateMap<Checklist, ChecklistResponseDTO>();
+        CreateMap<ChecklistQuestion, ChecklistQuestionDTO>();
+        CreateMap<ChecklistAnswerRow, ChecklistAnswerDTO>()
+            .ForMember(dto => dto.QuestionOrder, expression => 
+                expression.MapFrom(r => r.Question.QuestionOrder))
+            .ForMember(dto => dto.QuestionText, expression => 
+                expression.MapFrom(r => r.Question.QuestionText))
+            .ForMember(dto => dto.Recommendations, expression => 
+                expression.MapFrom(r => r.Question.Recommendations));
+
+
+        CreateMap<CompanyRegisterRequestDTO, Company>();
+        CreateMap<Company, CompanyRegisterResponseDTO>();
+        CreateMap<Company, CompanyLoginResponseDto>();
+    }
+}

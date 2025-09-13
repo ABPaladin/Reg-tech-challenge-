@@ -7,9 +7,11 @@ public partial class Checklist
 {
     public int Id { get; set; }
 
-    public int CompanyIpId { get; set; }
+    public int CompanyId { get; set; }
 
     public DateTime Datetime { get; set; }
 
-    public virtual CompanyIp CompanyIp { get; set; } = null!;
+    public virtual ICollection<ChecklistAnswerRow> ChecklistAnswerRows { get; set; } = new List<ChecklistAnswerRow>();
+
+    public virtual Company Company { get; set; } = null!;
 }

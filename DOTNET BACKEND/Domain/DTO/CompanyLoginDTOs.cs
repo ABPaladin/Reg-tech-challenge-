@@ -7,5 +7,5 @@ public class CompanyLoginRequestDto
 
 public class CompanyLoginResponseDto
 {
-    public int CompanyId { get; set; }
+    public int Id { get; set; }
 }

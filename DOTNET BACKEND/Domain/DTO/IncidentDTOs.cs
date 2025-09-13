@@ -1,8 +1,24 @@
 ﻿namespace Domain.DTO;
 
-public class IncidentRequestDTO
+public class CreateIncidentRequestDTO
 {
-    
+    public int CompanyId { get; set; }
+    public string? Text { get; set; }
+    public bool? IsCritical { get; set; }
+    public bool? IsInitiallyAverted { get; set; }
+    public int? RepeatIncidentId { get; set; }
+}
+
+public class UpdateIncidentRequestDTO
+{
+    public int IncidentId { get; set; }
+    public string? Text { get; set; }
+}
+
+public class CloseIncidentRequestDTO
+{
+    public int IncidentId { get; set; }
+    public string? Text { get; set; }
 }
 
 public class IncidentResponseDTO
@@ -17,5 +33,5 @@ public class IncidentResponseDTO
     public bool IsCritical { get; set; }
     public bool IsInitiallyAverted { get; set; }
     public int? RepeatIncidentId { get; set; }
-    public int Status { get; set; }
+    public string Status { get; set; }
 }

@@ -13,7 +13,5 @@ public partial class CompanyIp
 
     public virtual ICollection<AutomaticCheckAuditHeader> AutomaticCheckAuditHeaders { get; set; } = new List<AutomaticCheckAuditHeader>();
 
-    public virtual ICollection<Checklist> Checklists { get; set; } = new List<Checklist>();
-
     public virtual Company Company { get; set; } = null!;
 }

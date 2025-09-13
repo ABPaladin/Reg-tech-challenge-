@@ -65,33 +65,37 @@ create table incidents
 
 -----------------------------
 
-create table company_ips
-(
-    id         int primary key generated always as identity,
-    company_id int not null references companies,
-    url        text
-);
+-- create table company_ips
+-- (
+--     id         int primary key generated always as identity,
+--     company_id int not null references companies,
+--     url        text
+-- );
 
 create table automatic_checks
 (
     id   int primary key generated always as identity,
+    check_order int not null unique,
     name text not null unique
 );
 
 insert into automatic_checks
-values (default, 'Ports');
+values (default, 0, 'Ports');
 insert into automatic_checks
-values (default, 'TLS');
+values (default, 1, 'TLS');
 insert into automatic_checks
-values (default, 'HTTP/HTTPS');
+values (default, 2, 'HTTP/HTTPS');
 insert into automatic_checks
-values (default, 'Vulns');
+values (default, 3, 'Vulns');
 
 create table automatic_check_audit_headers
 (
-    id            int primary key generated always as identity,
-    company_ip_id int         not null references company_ips,
-    datetime      timestamptz not null default (now())
+    id           int primary key generated always as identity,
+    company_id   int not null references companies,
+    ip_address   text        not null,
+    is_completed bool        not null default false,
+--     company_ip_id int         not null references company_ips,
+    datetime     timestamptz not null default (now())
 );
 
 create table automatic_check_audit_rows
@@ -109,10 +113,14 @@ create table automatic_check_audit_rows
 create table checklist_questions
 (
     id              int primary key generated always as identity,
-    question_order           int unique not null,
-    question_text   text not null,
-    recommendations text not null
+    question_order  int unique not null,
+    question_text   text       not null,
+    recommendations text       not null
 );
+
+insert into checklist_questions values (default, 0, 'Backup?', 'Do backups!');
+insert into checklist_questions values (default, 1, 'Trainings?', 'Do trainings!');
+insert into checklist_questions values (default, 2, 'OpSec?', 'Do OpSec!');
 
 create table checklists
 (

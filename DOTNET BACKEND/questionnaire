@@ -1,0 +1,111 @@
+Iată o listă de întrebări pentru auditul unei companii, formulate în limba română, conform Capitolului XI al Regulamentului privind modul de realizare a obligațiilor de asigurare a securității cibernetice de către furnizorii de servicii în sectoarele critice:
+Capitolul XI: CONTROLUL ACCESULUI
+
+
+Secțiunea 1: Politica de control al accesului
+
+1. Aveți regulamente interne de control al accesului, logic și fizic, la sistemele informatice?
+<!-- 1. Aveți politici de control al accesului, logic și fizic, la sistemele informatice? -->
+<!-- 1. Ați stabilit, documentat și implementat politici de control al accesului logic și fizic la rețelele și sistemele informatice, bazate pe cerințe comerciale și de securitate? -->
+<!-- 1. Compania a stabilit, documentat și implementat politici de control al accesului logic și fizic la rețelele și sistemele sale informatice, bazate pe cerințele comerciale și de securitate? -->
+
+
+2. Segmentați accesul la sisteme în dependență de rolul angajatului (administrator, lucrător, client extern)?
+<!-- 2. Aceste politici de control al accesului abordează accesul persoanelor (personal, vizitatori, entități externe, furnizori și prestatori de servicii)? -->
+
+3. Aplicați segmentarea rețelelor de calculatoare, Astfel ca sistemele critice să nu fie expuse public?
+<!-- 3. Aplicați asemenea politici asupra rețelelor de calculatoare? Astfel ca sistemele critice să nu fie expuse altora. -->
+<!-- 3. Politicile de control al accesului abordează accesul rețelelor și al sistemelor informatice? -->
+
+4. Aveți sisteme care asigură că doar angajatul corespunzător are acces la sisteme? (carduri de acces, chei)
+<!-- 4. Politicile de control al accesului asigură că accesul este acordat numai utilizatorilor autentificați în mod corespunzător? -->
+
+5. Revizuiți regulamentele interne în cazul unor riscuri sau incidente semnificative?
+<!-- 5. Revizuiți politicile în cazul unor riscuri sau incidente semnificative? -->
+<!-- 5. Politicile de control al accesului sunt revizuite și, dacă este cazul, actualizate la intervale planificate și atunci când apar incidente semnificative sau modificări semnificative ale operațiunilor ori ale riscurilor? -->
+
+Secțiunea a 2-a: Gestionarea drepturilor de acces
+
+1. Aveți proceduri de acordare, eliminare și documentare a drepturilor de acces ale angajaților asupra sistemelor?
+<!-- 1. Compania acordă, modifică, elimină și documentează drepturile de acces la rețelele și sistemele informatice în conformitate cu politica de control al accesului? -->
+
+2. Atribuiți angajaților drepturi minime pentru a-și îndeplini sarcina?
+<!-- 2. Atribuiți drepturi de acces angajaților în baza principiului privilegiilor minime? -->
+<!-- 2. Drepturile de acces sunt atribuite și revocate pe baza principiilor necesității de a cunoaște, privilegiului minim și separării sarcinilor? -->
+
+3. Stergeți drepturile de acces ale angajaților la demisionarea sau concedierea acestora?
+<!-- 3. Sunt drepturile de acces modificate în mod corespunzător la încetarea sau modificarea raportului de muncă? -->
+
+4. Aveți o echipă responsabilă de administrarea drepturilor de acces?
+<!-- 4. Accesul la rețelele și sistemele informatice este autorizat de către persoanele relevante? -->
+
+5. Oferiți drepturi de acces separate pentru persoane terțe (vizitatori, furnizori de servicii), și le limitați accesul și durata drepturilor?
+<!-- 5. Drepturile de acces abordează în mod corespunzător accesul terților, cum ar fi vizitatorii, furnizorii și prestatorii de servicii, în special prin limitarea sferei și duratei acestor drepturi? -->
+
+6. Țineți un registru de drepturi de acces?
+<!-- 6. Compania ține un registru al drepturilor de acces acordate? -->
+
+7. Salvați istoricul modificărilor aplicate asupra drepturilor de acces?
+<!-- 7. Se aplică jurnalizarea gestionării drepturilor de acces? -->
+
+8. Revizuiți regulat drepturile de acces?
+<!-- 8. Drepturile de acces sunt revizuite la intervale planificate și modificate în conformitate cu schimbările organizaționale, iar rezultatele revizuirii, inclusiv modificările necesare, sunt documentate? -->
+
+Secțiunea a 3-a: Conturile privilegiate și conturile de administrare a sistemului
+
+1. Controlați regulat siguranța conturilor privilegiate?
+<!-- 1. Compania menține politici de gestionare a conturilor privilegiate și a conturilor de administrare a sistemului, ca parte a politicii de control al accesului? -->
+
+2. Ați stabilit măsuri de securitate sigure asupra logării în conturile privilegiate? Precum confirmării adiționale prin aplicație de autentificare/sms.
+<!-- 2. Aceste politici includ proceduri riguroase de identificare, autentificare (inclusiv autentificare multifactorială) și autorizare pentru conturile privilegiate și conturile de administrare a sistemului? -->
+
+3. Conturile privilegiate obțin exclusiv accese specifice asupra sistemelor? (spre exemplu nu aveți un singur administrator asupra întregului sistem, ci e separat pentru web, servere, baze de date, etc)
+<!-- 3. Sunt create conturi specifice, utilizate exclusiv pentru operațiunile de administrare a sistemului (cum ar fi instalarea, configurarea, gestionarea sau întreținerea)? -->
+
+
+<!-- 4. Sunt privilegiile de administrare a sistemului individualizate și restricționate în cea mai mare măsură posibilă? -->
+ 
+5. Emailurile interne sunt utilizate numai în scop corporativ, și nu se folosesc pentru servicii externe sau divertisment?
+<!-- 5. Conturile interne sunt utilizate numai pentru conectarea la sistem, și nu se folosesc pentru servicii externe? -->
+<!-- 5. Conturile de administrare a sistemului sunt utilizate numai pentru conectarea la sistemele de administrare a sistemului? -->
+
+<!-- 6. Drepturile de acces aferente conturilor privilegiate și conturilor de administrare a sistemului sunt revizuite la intervale planificate, modificate în conformitate cu schimbările organizaționale și documentate, inclusiv modificările necesare? COVERED BY 2.8 -->
+
+Secțiunea a 4-a: Sisteme de administrare
+
+<!-- 1. Compania restricționează și controlează utilizarea sistemelor de administrare a sistemului în conformitate cu politica de control al accesului? COVERED BY 3.1-->
+<!-- 2. Sistemele de administrare a sistemului sunt utilizate numai în scopul administrării, și nu pentru alte operațiuni? COVERED BY 3.5-->
+3. Restricționați instalarea programelor neesențiale serviciului pe calculatoarele de lucru?
+<!-- 3. Astfel de sisteme sunt separate în mod logic de aplicațiile software care nu sunt utilizate în scopul administrării sistemului? -->
+
+4. Sistemele administratorilor sunt protejate prin logare și criptare?
+<!-- 4. Accesul la sistemele de administrare a sistemului este protejat prin autentificare și criptare? -->
+
+5. Efectuați regulat traininguri de securitate pe internet pentru angajații voștri?
+
+Secțiunea a 5-a: Identificare
+1. Compania gestionează întregul ciclu de viață al identităților rețelelor și sistemelor informatice și ale utilizatorilor acestora?
+2. Sunt stabilite identități unice pentru rețelele și sistemele informatice și pentru utilizatorii acestora?
+3. Identitatea utilizatorilor este asociată cu o singură persoană?
+4. Se asigură supravegherea identităților rețelei și sistemelor informatice?
+5. Se aplică jurnalizarea gestionării identităților?
+6. Sunt identitățile atribuite mai multor persoane (identitățile comune) permise numai dacă sunt necesare din motive comerciale sau operaționale și fac obiectul unui proces de aprobare și al unei documentări explicite?
+7. Identitățile rețelelor și sistemelor informatice și ale utilizatorilor acestora sunt revizuite periodic și dezactivate fără întârziere dacă nu mai sunt necesare?
+
+Secțiunea a 6-a: Autentificare
+1. Compania implementează proceduri și tehnologii de autentificare securizată bazate pe restricții de acces și pe politica privind controlul accesului?
+2. Puterea autentificării este adecvată pentru clasificarea activului care urmează să fie accesat?
+3. Alocarea către utilizatori și gestionarea informațiilor secrete de autentificare sunt controlate printr-un proces care asigură confidențialitatea informațiilor, inclusiv consilierea personalului privind gestionarea adecvată a acestora?
+4. Se solicită modificarea acreditărilor de autentificare inițiale la intervale predefinite și în cazul în care se suspectează că respectivele acreditări au fost compromise?
+5. Se solicită resetarea acreditărilor de autentificare și blocarea utilizatorilor după un număr predefinit de încercări nereușite de conectare?
+6. Sesiunile inactive sunt încheiate după o perioadă prestabilită de inactivitate?
+7. Se solicită acreditări separate pentru a obține acces privilegiat sau a avea acces la conturi administrative?
+8. Compania utilizează, în măsura în care este fezabil, metode de autentificare de ultimă generație, în conformitate cu riscul evaluat și cu clasificarea activului, precum și informații de autentificare unice?
+9. Procedurile și tehnologiile de autentificare sunt revizuite la intervale planificate?
+Secțiunea a 7-a: Autentificarea multifactorială
+1. Compania asigură că utilizatorii sunt autentificați prin factori de autentificare multipli sau prin mecanisme de autentificare continuă pentru accesarea rețelelor și a sistemelor informatice, dacă este adecvat, în conformitate cu clasificarea activului care urmează să fie accesat?
+2. Puterea autentificării este adecvată pentru clasificarea activului care urmează să fie accesat?
+
+
+questions about staff training
+

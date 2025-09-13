@@ -20,9 +20,11 @@ public partial class PgContext : DbContext
 
     public virtual DbSet<Checklist> Checklists { get; set; }
 
-    public virtual DbSet<Company> Companies { get; set; }
+    public virtual DbSet<ChecklistAnswerRow> ChecklistAnswerRows { get; set; }
 
-    public virtual DbSet<CompanyIp> CompanyIps { get; set; }
+    public virtual DbSet<ChecklistQuestion> ChecklistQuestions { get; set; }
+
+    public virtual DbSet<Company> Companies { get; set; }
 
     public virtual DbSet<Incident> Incidents { get; set; }
 
@@ -36,11 +38,14 @@ public partial class PgContext : DbContext
 
             entity.ToTable("automatic_checks");
 
+            entity.HasIndex(e => e.CheckOrder, "automatic_checks_check_order_key").IsUnique();
+
             entity.HasIndex(e => e.Name, "automatic_checks_name_key").IsUnique();
 
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("id");
+            entity.Property(e => e.CheckOrder).HasColumnName("check_order");
             entity.Property(e => e.Name).HasColumnName("name");
         });
 
@@ -53,15 +58,19 @@ public partial class PgContext : DbContext
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("id");
-            entity.Property(e => e.CompanyIpId).HasColumnName("company_ip_id");
+            entity.Property(e => e.CompanyId).HasColumnName("company_id");
             entity.Property(e => e.Datetime)
                 .HasDefaultValueSql("now()")
                 .HasColumnName("datetime");
+            entity.Property(e => e.IpAddress).HasColumnName("ip_address");
+            entity.Property(e => e.IsCompleted)
+                .HasDefaultValue(false)
+                .HasColumnName("is_completed");
 
-            entity.HasOne(d => d.CompanyIp).WithMany(p => p.AutomaticCheckAuditHeaders)
-                .HasForeignKey(d => d.CompanyIpId)
+            entity.HasOne(d => d.Company).WithMany(p => p.AutomaticCheckAuditHeaders)
+                .HasForeignKey(d => d.CompanyId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("automatic_check_audit_headers_company_ip_id_fkey");
+                .HasConstraintName("automatic_check_audit_headers_company_id_fkey");
         });
 
         modelBuilder.Entity<AutomaticCheckAuditRow>(entity =>
@@ -100,15 +109,55 @@ public partial class PgContext : DbContext
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("id");
-            entity.Property(e => e.CompanyIpId).HasColumnName("company_ip_id");
+            entity.Property(e => e.CompanyId).HasColumnName("company_id");
             entity.Property(e => e.Datetime)
                 .HasDefaultValueSql("now()")
                 .HasColumnName("datetime");
 
-            entity.HasOne(d => d.CompanyIp).WithMany(p => p.Checklists)
-                .HasForeignKey(d => d.CompanyIpId)
+            entity.HasOne(d => d.Company).WithMany(p => p.Checklists)
+                .HasForeignKey(d => d.CompanyId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("checklists_company_ip_id_fkey");
+                .HasConstraintName("checklists_company_id_fkey");
+        });
+
+        modelBuilder.Entity<ChecklistAnswerRow>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("checklist_answer_rows_pkey");
+
+            entity.ToTable("checklist_answer_rows");
+
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasColumnName("id");
+            entity.Property(e => e.AnsweredCorrectly).HasColumnName("answered_correctly");
+            entity.Property(e => e.ChecklistId).HasColumnName("checklist_id");
+            entity.Property(e => e.QuestionId).HasColumnName("question_id");
+
+            entity.HasOne(d => d.Checklist).WithMany(p => p.ChecklistAnswerRows)
+                .HasForeignKey(d => d.ChecklistId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("checklist_answer_rows_checklist_id_fkey");
+
+            entity.HasOne(d => d.Question).WithMany(p => p.ChecklistAnswerRows)
+                .HasForeignKey(d => d.QuestionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("checklist_answer_rows_question_id_fkey");
+        });
+
+        modelBuilder.Entity<ChecklistQuestion>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("checklist_questions_pkey");
+
+            entity.ToTable("checklist_questions");
+
+            entity.HasIndex(e => e.QuestionOrder, "checklist_questions_question_order_key").IsUnique();
+
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasColumnName("id");
+            entity.Property(e => e.QuestionOrder).HasColumnName("question_order");
+            entity.Property(e => e.QuestionText).HasColumnName("question_text");
+            entity.Property(e => e.Recommendations).HasColumnName("recommendations");
         });
 
         modelBuilder.Entity<Company>(entity =>
@@ -122,36 +171,10 @@ public partial class PgContext : DbContext
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("id");
-            entity.Property(e => e.Address).HasColumnName("address");
-            entity.Property(e => e.IsoCertified).HasColumnName("iso_certified");
             entity.Property(e => e.Name).HasColumnName("name");
-            entity.Property(e => e.OpsecTools).HasColumnName("opsec_tools");
             entity.Property(e => e.Password).HasColumnName("password");
             entity.Property(e => e.ResponsibleEmail).HasColumnName("responsible_email");
-            entity.Property(e => e.ResponsibleName).HasColumnName("responsible_name");
             entity.Property(e => e.ResponsiblePhone).HasColumnName("responsible_phone");
-            entity.Property(e => e.RiskAssesment).HasColumnName("risk_assesment");
-            entity.Property(e => e.RiskSolution).HasColumnName("risk_solution");
-            entity.Property(e => e.SectorType).HasColumnName("sector_type");
-            entity.Property(e => e.Size).HasColumnName("size");
-        });
-
-        modelBuilder.Entity<CompanyIp>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("company_ips_pkey");
-
-            entity.ToTable("company_ips");
-
-            entity.Property(e => e.Id)
-                .UseIdentityAlwaysColumn()
-                .HasColumnName("id");
-            entity.Property(e => e.CompanyId).HasColumnName("company_id");
-            entity.Property(e => e.Url).HasColumnName("url");
-
-            entity.HasOne(d => d.Company).WithMany(p => p.CompanyIps)
-                .HasForeignKey(d => d.CompanyId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("company_ips_company_id_fkey");
         });
 
         modelBuilder.Entity<Incident>(entity =>
