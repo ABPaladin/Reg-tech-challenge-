@@ -4,6 +4,7 @@ namespace Application.Interfaces;
 
 public interface IAutoCheckService
 {
-    public Task<List<AutoCheckResponseDTO>> GetOldAutoChecks(int companyId);
-    public Task<AutoCheckResponseDTO> ExecuteNewAutoCheck(int companyId, string ipToCheck);
+    public Task<AutoCheckScoreDto> GetScore(int companyId);
+    public Task<List<AutoCheckResponseDto>> GetOldAutoChecks(int companyId);
+    public Task<AutoCheckResponseDto> ExecuteNewAutoCheck(int companyId, string ipToCheck);
 }

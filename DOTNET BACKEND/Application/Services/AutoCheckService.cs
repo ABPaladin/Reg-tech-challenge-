@@ -15,7 +15,39 @@ public class AutoCheckService(
     ICveScanService cveScanService,
     ITlsScanService tlsScanService) : IAutoCheckService
 {
-    public async Task<List<AutoCheckResponseDTO>> GetOldAutoChecks(int companyId)
+    public async Task<AutoCheckScoreDto> GetScore(int companyId)
+    {
+        var completedAtLeastOneTest = await context.AutomaticCheckAuditHeaders
+            .Where(c => c.CompanyId == companyId)
+            .AnyAsync();
+
+        if (!completedAtLeastOneTest)
+            return new AutoCheckScoreDto
+            {
+                PassedChecks = 0,
+                TotalChecks = 0
+            };
+
+        
+        var latestCheckId = await context.AutomaticCheckAuditHeaders
+            .Where(c => c.CompanyId == companyId)
+            .MaxAsync(c => c.Id);
+
+        var passedChecks = await context.AutomaticCheckAuditRows
+            .Where(r => r.AutomaticCheckAuditHeaderId == latestCheckId)
+            .Where(r => r.Passed)
+            .CountAsync();
+
+        var totalChecks = await context.AutomaticChecks.CountAsync();
+
+        return new AutoCheckScoreDto
+        {
+            PassedChecks = passedChecks,
+            TotalChecks = totalChecks
+        };
+    }
+
+    public async Task<List<AutoCheckResponseDto>> GetOldAutoChecks(int companyId)
     {
         var autoChecks = await context.AutomaticCheckAuditHeaders
             .Where(a => a.CompanyId == companyId)
@@ -23,10 +55,10 @@ public class AutoCheckService(
             .ThenInclude(r => r.AutomaticCheck)
             .ToListAsync();
 
-        return mapper.Map<List<AutoCheckResponseDTO>>(autoChecks);
+        return mapper.Map<List<AutoCheckResponseDto>>(autoChecks);
     }
 
-    public async Task<AutoCheckResponseDTO> ExecuteNewAutoCheck(int companyId, string ipToCheck)
+    public async Task<AutoCheckResponseDto> ExecuteNewAutoCheck(int companyId, string ipToCheck)
     {
         var autoCheck = new AutomaticCheckAuditHeader
         {
@@ -49,6 +81,6 @@ public class AutoCheckService(
         autoCheck.IsCompleted = true;
         await context.SaveChangesAsync();
         
-        return mapper.Map<AutoCheckResponseDTO>(autoCheck);
+        return mapper.Map<AutoCheckResponseDto>(autoCheck);
     }
 }

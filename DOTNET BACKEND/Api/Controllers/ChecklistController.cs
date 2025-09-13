@@ -9,11 +9,10 @@ namespace Api.Controllers;
 public class ChecklistController(IChecklistService service) : ControllerBase
 {
     [HttpGet("score")]
-    public async Task<ActionResult<int>> GetScore(int companyId)
+    public async Task<ActionResult<AutoCheckScoreDto>> GetScore(int companyId)
     {
-        throw new NotImplementedException();
+        return Ok(await service.GetScore(companyId));
     }
-
     
     [HttpGet("{companyId:int}")]
     public async Task<ActionResult<List<ChecklistResponseDTO>>> GetAnsweredChecklists(int companyId)

@@ -98,12 +98,15 @@ create table automatic_check_audit_headers
     datetime     timestamptz not null default (now())
 );
 
+create index on automatic_check_audit_headers(company_id);
+create index on automatic_check_audit_headers(company_id, datetime);
+
 create table automatic_check_audit_rows
 (
     id                              int primary key generated always as identity,
     automatic_check_audit_header_id int  not null references automatic_check_audit_headers,
     automatic_check_id              int  not null references automatic_checks,
-    passed                          bool,
+    passed                          bool not null,
     comment                         text null,
     unique (automatic_check_audit_header_id, automatic_check_id)
 );

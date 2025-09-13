@@ -55,6 +55,10 @@ public partial class PgContext : DbContext
 
             entity.ToTable("automatic_check_audit_headers");
 
+            entity.HasIndex(e => new { e.CompanyId, e.Datetime }, "automatic_check_audit_headers_company_id_datetime_idx");
+
+            entity.HasIndex(e => e.CompanyId, "automatic_check_audit_headers_company_id_idx");
+
             entity.Property(e => e.Id)
                 .UseIdentityAlwaysColumn()
                 .HasColumnName("id");

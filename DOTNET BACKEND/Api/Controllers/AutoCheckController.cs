@@ -8,16 +8,15 @@ namespace Api.Controllers;
 [Route("[controller]")]
 public class AutoCheckController(IAutoCheckService service) : ControllerBase
 {
-    //TODO: endpoint for score
     [HttpGet("score")]
-    public async Task<ActionResult<int>> GetScore(int companyId)
+    public async Task<ActionResult<AutoCheckScoreDto>> GetScore(int companyId)
     {
-        throw new NotImplementedException();
+        return Ok(await service.GetScore(companyId));
     }
     
     
     [HttpGet]
-    public async Task<ActionResult<List<AutoCheckResponseDTO>>> GetOldAutoChecks(int companyId)
+    public async Task<ActionResult<List<AutoCheckResponseDto>>> GetOldAutoChecks(int companyId)
     {
         return Ok(await service.GetOldAutoChecks(companyId));
     }

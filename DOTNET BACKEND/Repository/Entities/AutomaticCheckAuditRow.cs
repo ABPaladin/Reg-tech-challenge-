@@ -11,7 +11,7 @@ public partial class AutomaticCheckAuditRow
 
     public int AutomaticCheckId { get; set; }
 
-    public bool? Passed { get; set; }
+    public bool Passed { get; set; }
 
     public string? Comment { get; set; }
 
