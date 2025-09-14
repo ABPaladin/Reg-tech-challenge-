@@ -19,6 +19,7 @@ public class AutoCheckService(
     {
         var completedAtLeastOneTest = await context.AutomaticCheckAuditHeaders
             .Where(c => c.CompanyId == companyId)
+            .Where(c => c.IsCompleted)
             .AnyAsync();
 
         if (!completedAtLeastOneTest)
@@ -73,9 +74,9 @@ public class AutoCheckService(
         
 
         // await portScanService.Scan(ipToCheck);
-        autoCheck.AutomaticCheckAuditRows.Add(await portScanService.Scan(ipToCheck));
         autoCheck.AutomaticCheckAuditRows.Add(await tlsScanService.Scan(ipToCheck));
         autoCheck.AutomaticCheckAuditRows.Add(await cveScanService.Scan(ipToCheck));
+        autoCheck.AutomaticCheckAuditRows.Add(await portScanService.Scan(ipToCheck));
         
         
         autoCheck.IsCompleted = true;
